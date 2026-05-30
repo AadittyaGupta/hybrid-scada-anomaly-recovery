@@ -1287,7 +1287,7 @@ if page == "📊 Dashboard" and uploaded_files:
 # ---------------------------
 
     # # Advanced Heatmap
-    # st.subheader("🔥 Feature-wise Correlation Heatmap")
+    # st.subheader("Feature-wise Correlation Heatmap")
 
     # numeric_cols = combined_df.select_dtypes(include=['float64', 'int64']).columns
     # heatmap_matrix = combined_df[numeric_cols].corr()
@@ -1311,35 +1311,6 @@ if page == "📊 Dashboard" and uploaded_files:
 # ---------------------------
 
     st.subheader("🧭 Attack Timeline")
-
-    # timeline = combined_df.copy()
-    # if "timestamp" in combined_df.columns:
-    #     timeline['time'] = combined_df['timestamp']
-    # else:
-    #     timeline['time'] = range(len(timeline))
-
-    # timeline['anomaly'] = timeline['final_anomaly'].astype(int)
-    # # timeline = timeline[timeline["severity"] != "Normal"]
-    # # timeline["event_group"] = (timeline["time"].diff() > 5).cumsum()
-
-
-    # # ---------------------------
-    # #  ADDING SEVERITY LAYER (SYMBOLS)
-    # # ---------------------------
-    
-    # fig_timeline = px.scatter(
-    #     timeline,
-    #     x='time',
-    #     y='voltage',
-    #     color='event_type',
-    #     # symbol='severity',
-    #     title="SCADA Attack Timeline "
-    # )
-
-    # fig_timeline.update_layout(template="plotly_dark")
-
-    # st.plotly_chart(fig_timeline, use_container_width=True)
-
 
     timeline = combined_df.copy()
 
@@ -1433,66 +1404,6 @@ if page == "📊 Dashboard" and uploaded_files:
 if page == "🚨 Alerts" and uploaded_files:
 
     st.subheader("🚨 Detected Threat Patterns")
-
-    # if patterns:
-
-    #     st.markdown("### ⚠️ System Observations")
-
-    #     for p in patterns:
-
-    #         if "Burst anomaly" in p:
-    #             with st.expander("⚠️ Burst Anomaly Pattern (Coordinated Attack)"):
-    #                 st.error(p)
-    #                 st.markdown("""
-    #                 **What it means:**
-    #                 - Multiple anomalies detected in a short time window  
-    #                 - Indicates possible coordinated cyber intrusion  
-
-    #                 **Impact:**
-    #                 - Grid instability  
-    #                 - Potential cascading failures  
-
-    #                 **Recommended Action:**
-    #                 - Investigate control signals immediately  
-    #                 - Check for unauthorized access
-    #                 """)
-
-    #         elif "voltage manipulation" in p:
-    #             with st.expander("⚠️ Voltage Manipulation Attack"):
-    #                 st.warning(p)
-    #                 st.markdown("""
-    #                 **What it means:**
-    #                 - Sudden abnormal spikes in voltage values  
-
-    #                 **Impact:**
-    #                 - Equipment damage risk  
-    #                 - System imbalance  
-
-    #                 **Recommended Action:**
-    #                 - Verify sensor readings  
-    #                 - Inspect control commands
-    #                 """)
-
-    #         elif "sensor freeze" in p:
-    #             with st.expander("⚠️ Sensor Tampering / Freeze"):
-    #                 st.warning(p)
-    #                 st.markdown("""
-    #                 **What it means:**
-    #                 - Sensor values remain constant for long duration  
-
-    #                 **Impact:**
-    #                 - Hidden faults  
-    #                 - False system stability  
-
-    #                 **Recommended Action:**
-    #                 - Check sensor health  
-    #                 - Validate incoming data streams
-    #                 """)
-
-    # else:
-    #     st.success("✅ No suspicious patterns detected. System is stable.")
-
-
 
     st.markdown("### Intelligent System Observation Panel")
 
