@@ -151,7 +151,7 @@ Comparison between the original disturbed signal and the recovered signal after 
 ## Voltage Swell Recovery
 
 <p align="center">
-<img src="Images/Voltage_swell_rec.png" width="850">
+<img src="Images/voltage_swell_rec.png" width="850">
 </p>
 
 Recovery analysis for overvoltage conditions.
