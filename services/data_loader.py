@@ -14,14 +14,14 @@ def load_full_dataset():
         "scada_chunk1.csv",
         "scada_chunk2.csv",
         "scada_chunk3.csv",
-        "scada_chunk4.csv",
+        "scada_chunk4_updated.csv",
         "scada_chunk5.csv",
         "scada_chunk6.csv",
         "scada_chunk7.csv",
         "scada_chunk8.csv",
         "scada_chunk9.csv",
         "scada_chunk10.csv",
-        "scada_chunk11.csv"
+        "scada_chunk11_updated.csv"
     ]
 
     df_list = []
