@@ -575,14 +575,14 @@ if page == "⚡ Live SCADA Simulation":
                         x=zoom_original.index,
                         y=zoom_original[selected_feature],
                         name="System Collapse (0V)",
-                        line=dict(color='red', width=3)
+                        line=dict(color='#D62728', width=3)
                     ))
 
                     fig.add_trace(go.Scatter(
                         x=zoom_recovered.index,
                         y=zoom_recovered[selected_feature],
                         name="System Restoration",
-                        line=dict(color='yellow', width=3)
+                        line=dict(color='#2CA02C', width=3)
                     ))
 
                     # Highlight blackout region
@@ -593,7 +593,7 @@ if page == "⚡ Live SCADA Simulation":
                         y=collapse_zone[selected_feature],
                         mode='markers',
                         name='Blackout Zone',
-                        marker=dict(color='white', size=6)
+                        marker=dict(color='#000000', size=6)
                     ))
 
                     fig.update_layout(
@@ -612,14 +612,14 @@ if page == "⚡ Live SCADA Simulation":
                         x=zoom_original.index,
                         y=zoom_original[selected_feature],
                         name="Original (With Attack)",
-                        line=dict(color='red', dash='dot')
+                        line=dict(color='#D62728', dash='dot')
                     ))
 
                     fig.add_trace(go.Scatter(
                         x=zoom_recovered.index,
                         y=zoom_recovered[selected_feature].rolling(5).mean(),
                         name="Recovered System",
-                        line=dict(color='lime')
+                        line=dict(color='#2CA02C')
                     ))
 
                     # attack point
@@ -825,46 +825,6 @@ if page == "⚡ Live SCADA Simulation":
             )
 
         chart_placeholder = st.empty()
-
-        # if st.button("▶️ Start ESP32 Live"):
-
-        #     value = None
-        #     try:
-        #         value = float(ser.readline().decode().strip())
-        #     except:
-        #         pass
-
-        #     if value is not None:
-
-        #         new_row = pd.DataFrame({
-        #             "voltage": [value],
-        #             "current": [value * 0.1],
-        #             "frequency": [50]
-        #         })
-
-        #         st.session_state.live_data = pd.concat(
-        #             [st.session_state.live_data, new_row],
-        #             ignore_index=True
-        #         )
-
-        #     df_live = st.session_state.live_data.tail(100)
-
-        #     fig = go.Figure()
-
-        #     fig.add_trace(go.Scatter(
-        #         x=df_live.index,
-        #         y=df_live["voltage"],
-        #         mode='lines',
-        #         name="Live Voltage"
-        #     ))
-
-        #     fig.update_layout(template="plotly_dark")
-
-        #     chart_placeholder.plotly_chart(fig, use_container_width=True)
-
-        #     time.sleep(1)
-        #     st.rerun()    
-
 
 
         if st.button("▶️ Start ESP32 Live"):
@@ -1185,20 +1145,6 @@ if page == "📊 Dashboard" and uploaded_files:
         major = combined_df[combined_df["severity"] == "Major"]
         minor = combined_df[combined_df["severity"] == "Minor"]
 
-        # fig.add_trace(go.Scatter(
-        #     x=x_axis[anomalies.index],
-        #     y=df.loc[anomalies.index, selected_feature],
-        #     mode='markers',
-        #     name='Anomalies',
-        #     marker=dict(color='red', size=8)
-        # ))
-
-        # fig.update_layout(
-        #     template="plotly_dark",
-        #     xaxis_title="Time",
-        #     yaxis_title=selected_feature.capitalize(),
-        #     height=500
-        # )
 
         # Minor
         fig.add_trace(go.Scatter(
@@ -1329,7 +1275,7 @@ if page == "📊 Dashboard" and uploaded_files:
         y=[0]*len(timeline),
         mode='lines',
         name='Normal',
-        line=dict(color='gray', width=1)
+        line=dict(color='#7F7F7F', width=1)
     ))
     
     # ---------------------------
@@ -1341,7 +1287,7 @@ if page == "📊 Dashboard" and uploaded_files:
         mode='markers',
         name='Anomalies',
         marker=dict(
-            color='red',
+            color='#D62728',
             size=6
         )
     ))
