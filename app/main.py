@@ -263,14 +263,11 @@ if page == "⚡ Live SCADA Simulation":
     if mode == "Dataset (1 Month)":
         df = load_full_dataset()
         df.columns = df.columns.str.lower()
-        # st.success("Dataset loaded: 1 month SCADA data")
-
-        # 👉 KEEP YOUR ENTIRE EXISTING CODE HERE (NO CHANGE)
 
         st.subheader("Live SCADA Simulation ")
 
 
-        # 🔥 Load full dataset
+        # Load full dataset
         df = load_full_dataset()
 
         # normalize column names (IMPORTANT)
@@ -340,7 +337,7 @@ if page == "⚡ Live SCADA Simulation":
                 anomalies = result_df[result_df['final_anomaly'] == True]
 
                 # ===========================
-                # 🔥 FORCE COLLAPSE DETECTION (independent of ML)
+                # FORCE COLLAPSE DETECTION (independent of ML)
                 # ===========================
 
                 for idx in range(len(raw_chunk)):
@@ -353,21 +350,9 @@ if page == "⚡ Live SCADA Simulation":
 
                 total_anomalies += len(anomalies)
 
-                # 🔥 CLASSIFY SEVERITY
+                # CLASSIFY SEVERITY
                 minor_anomalies = []
                 major_anomalies = []
-
-                # for idx in anomalies.index:
-                #     row = processed_df.loc[idx]
-
-                #     numeric_values = pd.to_numeric(row, errors='coerce')
-
-                #     if numeric_values.abs().max() > 3:
-                #     # relaxed rule for minor (catch more cases)
-                #     # if abs(row).max() > 3:   # strong deviation
-                #         major_anomalies.append(idx)
-                #     else:
-                #         minor_anomalies.append(idx)
 
                 for idx in anomalies.index:
                     row = processed_df.loc[idx]
@@ -375,7 +360,7 @@ if page == "⚡ Live SCADA Simulation":
 
                     raw_value = raw_chunk.loc[idx, selected_feature]
 
-                    # 🚨 FORCE collapse detection
+                    # FORCE collapse detection
                     if raw_value <= 20:
                         major_anomalies.append(idx)
 
@@ -384,20 +369,6 @@ if page == "⚡ Live SCADA Simulation":
 
                     else:
                         minor_anomalies.append(idx)
-
-                # HARDCODED DEMO WINDOW (14k–16k)
-                # if 14900 <= i <= 15000 and not st.session_state.get("alert_shown", False):
-
-                #     st.session_state["alert_shown"] = True
-
-                #     st.toast("🚨 Major Voltage Collapse Detected!", icon="🚨")
-                #     time.sleep(3)
-
-                #     st.toast("✅ System Stabilized - Anomaly Resolved", icon="✅")
-
-                # if major_anomalies:
-                #     st.toast("🚨 Major anomaly detected!", icon="🚨")
-                #     time.sleep(2)
 
                 # ---------------------------
                 # EXPLAIN + LOG
@@ -426,12 +397,12 @@ if page == "⚡ Live SCADA Simulation":
                         
                             event_triggered = True
 
-                            # 🔔 TOAST
+                            # TOAST
                             st.toast(f"🚨 {event_type} Detected!", icon="🚨")
                             time.sleep(2)
                             st.toast("✅ System Stabilized", icon="✅")
 
-                            # 📌 Store event center
+                            # Store event center
                             detected_events.append({
                                 "type": event_type,
                                 "index": absolute_index
@@ -472,7 +443,7 @@ if page == "⚡ Live SCADA Simulation":
                     title=f"{selected_feature.capitalize()} Live Monitoring"
                 )
 
-                # 🟡 Minor anomalies
+                # Minor anomalies
                 if minor_anomalies:
                     fig.add_trace(go.Scatter(
                         x=[len(history) - len(raw_chunk) + idx for idx in minor_anomalies],
@@ -482,7 +453,7 @@ if page == "⚡ Live SCADA Simulation":
                         marker=dict(color='yellow', size=6)
                     ))
 
-                # 🔴 Major anomalies
+                # Major anomalies
                 if major_anomalies:
                     fig.add_trace(go.Scatter(
                         x=[len(history) - len(raw_chunk) + idx for idx in major_anomalies],
@@ -625,14 +596,6 @@ if page == "⚡ Live SCADA Simulation":
                     # attack point
                     signal = zoom_original[selected_feature]
                     attack_idx = signal.idxmin()
-
-                    # fig.add_trace(go.Scatter(
-                    #     x=[attack_idx],
-                    #     y=[signal.iloc[attack_idx]],
-                    #     mode='markers',
-                    #     name='Attack Point',
-                    #     marker=dict(color='yellow', size=12, symbol='x')
-                    # ))
 
                     fig.update_layout(
                         template="plotly_dark",
@@ -981,14 +944,14 @@ if page == "📊 Dashboard" and uploaded_files:
 
 
 # ---------------------------
-# 📈 GRAPH (STATIC + LIVE MODE)
+# GRAPH (STATIC + LIVE MODE)
 # ---------------------------
     st.subheader(f"📈 {selected_feature.capitalize()} Monitoring")
 
     chart_placeholder = st.empty()
 
 # ---------------------------
-# 🔴 LIVE MODE
+# LIVE MODE
 # ---------------------------
     if st.session_state.start_sim:
 
@@ -1001,7 +964,7 @@ if page == "📊 Dashboard" and uploaded_files:
 
         window_size = 20
 
-        # 🔥 Train model ONCE on initial data
+        # Train model ONCE on initial data
         initial_data = live_df.iloc[:100]
 
         processed_df, _ = preprocess_data(initial_data)
@@ -1014,7 +977,7 @@ if page == "📊 Dashboard" and uploaded_files:
 
         for i in range(0, len(live_df), window_size):
 
-            # 🟢 get ONLY new data chunk
+            # get ONLY new data chunk
             current_chunk = stream_data(live_df, i, window_size)
             current_chunk = current_chunk.reset_index(drop=True)
  
@@ -1023,7 +986,7 @@ if page == "📊 Dashboard" and uploaded_files:
             if current_chunk.empty:
                 break
 
-            # 🔵 STORE ORIGINAL
+            # STORE ORIGINAL
             original_history.append(raw_chunk.copy())
 
             processed_df, _ = preprocess_data(current_chunk)
@@ -1037,7 +1000,7 @@ if page == "📊 Dashboard" and uploaded_files:
 
             # event_type = classify_voltage_event(raw_chunk.loc[idx, "voltage"])
 
-            # 🔥 EXPLAIN FIRST
+            # EXPLAIN FIRST
             if not anomalies.empty:
                 for idx in anomalies.index:
                     explanation = explain_anomaly(current_chunk, idx)
@@ -1066,13 +1029,12 @@ if page == "📊 Dashboard" and uploaded_files:
                 #         f"{severity} anomaly at {global_idx}: {explanation}"
                 #     )
 
-                # 🔥 APPLY RESPONSE
+                # APPLY RESPONSE
                 current_chunk = apply_response(current_chunk, anomalies)
 
-            # 🟢 STORE RECOVERED
+            # STORE RECOVERED
             recovered_history.append(current_chunk.copy())
 
-            # 🔥 ADD TO HISTORY (CRITICAL FIX)
             st.session_state.history_df = pd.concat(
                 [st.session_state.history_df, raw_chunk],
                 ignore_index=True
@@ -1100,7 +1062,7 @@ if page == "📊 Dashboard" and uploaded_files:
                 line=dict(color='#00BFFF')
             ))
 
-            # 🔥 Map anomaly positions correctly
+            # Map anomaly positions correctly
             anomaly_positions = anomalies.index.tolist()
 
             fig.add_trace(go.Scatter(
