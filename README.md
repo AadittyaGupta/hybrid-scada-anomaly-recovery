@@ -21,7 +21,7 @@ The system was developed using Python and Streamlit and provides interactive vis
 ## System Architecture
 
 <p align="center">
-<img src="Images/System_Architecture_Diagram.png" width="850">
+<img src="Images/System_Architecture_Diagram.png" width="700">
 </p>
 
 ---
