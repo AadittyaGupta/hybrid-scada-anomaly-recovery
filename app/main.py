@@ -436,11 +436,67 @@ if page == "⚡ Live SCADA Simulation":
                     name="Live Data"
                 ))
 
+                # fig.update_layout(
+                #     template="plotly_dark",
+                #     xaxis_title="Time (Data Points)",
+                #     yaxis_title=selected_feature.capitalize(),
+                #     title=f"{selected_feature.capitalize()} Live Monitoring"
+                # )
+
                 fig.update_layout(
-                    template="plotly_dark",
+                    template="plotly_white",
+
+                    title=dict(
+                        text=f"{selected_feature.capitalize()} Live Monitoring",
+                        font=dict(
+                            family="Times New Roman",
+                            size=24,
+                            color="black"
+                        )
+                    ),
+
+                    font=dict(
+                        family="Times New Roman",
+                        size=18,
+                        color="black"
+                    ),
+
+                    legend=dict(
+                        font=dict(
+                            family="Times New Roman",
+                            size=18,
+                            color="black"
+                        )
+                    ),
+
                     xaxis_title="Time (Data Points)",
-                    yaxis_title=selected_feature.capitalize(),
-                    title=f"{selected_feature.capitalize()} Live Monitoring"
+                    yaxis_title=selected_feature.capitalize()
+                )
+
+                fig.update_xaxes(
+                    title_font=dict(
+                        family="Times New Roman",
+                        size=20,
+                        color="black"
+                    ),
+                    tickfont=dict(
+                        family="Times New Roman",
+                        size=18,
+                        color="black"
+                    )
+                )
+
+                fig.update_yaxes(
+                    title_font=dict(
+                        family="Times New Roman",
+                        size=20,
+                        color="black"
+                    ),
+                    tickfont=dict(
+                        family="Times New Roman",
+                        size=18,
+                        color="black"
+                    )
                 )
 
                 # Minor anomalies
@@ -450,7 +506,7 @@ if page == "⚡ Live SCADA Simulation":
                         y=raw_chunk.loc[minor_anomalies, selected_feature],
                         mode='markers',
                         name='Minor',
-                        marker=dict(color='yellow', size=6)
+                        marker=dict(color='yellow', size=8)
                     ))
 
                 # Major anomalies
@@ -461,7 +517,7 @@ if page == "⚡ Live SCADA Simulation":
                         mode='markers',
                         # name='Major',
                         name='Anomaly',
-                        marker=dict(color='red', size=10)
+                        marker=dict(color='red', size=12)
                     ))
 
                 chart_placeholder.plotly_chart(fig, use_container_width=True)
@@ -567,11 +623,51 @@ if page == "⚡ Live SCADA Simulation":
                         marker=dict(color='#000000', size=6)
                     ))
 
+                    # fig.update_layout(
+                    #     template="plotly_dark",
+                    #     title="⚡ Voltage Collapse & System Restoration",
+                    #     xaxis_title="Time Window (~2000 points)",
+                    #     yaxis_title="Voltage"
+                    # )
+
                     fig.update_layout(
-                        template="plotly_dark",
-                        title="⚡ Voltage Collapse & System Restoration",
-                        xaxis_title="Time Window (~2000 points)",
-                        yaxis_title="Voltage"
+                    template="plotly_white",
+                    
+                    title=dict(
+                        text="⚡ Voltage Collapse & System Restoration",
+                        font=dict(
+                            family="Times New Roman",
+                            size=24,
+                            color="black"
+                        )
+                    ),
+                    
+                    font=dict(
+                        family="Times New Roman",
+                        size=18,
+                        color="black"
+                    ),
+                    
+                    legend=dict(
+                        font=dict(
+                            family="Times New Roman",
+                            size=18,
+                            color="black"
+                        )
+                    ),
+                    
+                    xaxis_title="Time Window (~2000 points)",
+                    yaxis_title="Voltage"
+                    )
+                    
+                    fig.update_xaxes(
+                    title_font=dict(size=20,color="black"),
+                    tickfont=dict(size=18,color="black")
+                    )
+                    
+                    fig.update_yaxes(
+                    title_font=dict(size=20,color="black"),
+                    tickfont=dict(size=18,color="black")
                     )
 
                 # ===========================
@@ -597,12 +693,56 @@ if page == "⚡ Live SCADA Simulation":
                     signal = zoom_original[selected_feature]
                     attack_idx = signal.idxmin()
 
+                    # fig.update_layout(
+                    #     template="plotly_dark",
+                    #     title=f"⚡ {event['type']} Recovery",
+                    #     xaxis_title="Time Window (~2000 points)",
+                    #     yaxis_title="Voltage"
+                    # )
+
+
                     fig.update_layout(
-                        template="plotly_dark",
-                        title=f"⚡ {event['type']} Recovery",
+                        template="plotly_white",
+
+                        title=dict(
+                            text=f"⚡ {event['type']} Recovery",
+                            font=dict(
+                                family="Times New Roman",
+                                size=24,
+                                color="black"
+                            )
+                        ),
+
+                        font=dict(
+                            family="Times New Roman",
+                            size=18,
+                            color="black"
+                        ),
+
+                        legend=dict(
+                            font=dict(
+                                family="Times New Roman",
+                                size=18,
+                                color="black"
+                            )
+                        ),
+
                         xaxis_title="Time Window (~2000 points)",
                         yaxis_title="Voltage"
                     )
+
+                    fig.update_xaxes(
+                        title_font=dict(size=20,color="black"),
+                        tickfont=dict(size=18,color="black")
+                    )
+
+                    fig.update_yaxes(
+                        title_font=dict(size=20,color="black"),
+                        tickfont=dict(size=18,color="black")
+                    )
+
+
+                
 
                 st.plotly_chart(fig, use_container_width=True)
 
@@ -1073,11 +1213,59 @@ if page == "📊 Dashboard" and uploaded_files:
                 marker=dict(color='red', size=8)
             ))
 
+            # fig.update_layout(
+            #     template="plotly_dark",
+            #     xaxis_title="Time",
+            #     yaxis_title=selected_feature.capitalize(),
+            #     height=500
+            # )
+
             fig.update_layout(
-                template="plotly_dark",
+                template="plotly_white",
+
+                font=dict(
+                    family="Times New Roman",
+                    size=18,
+                    color="black"
+                ),
+
+                legend=dict(
+                    font=dict(
+                        family="Times New Roman",
+                        size=18,
+                        color="black"
+                    )
+                ),
+
                 xaxis_title="Time",
                 yaxis_title=selected_feature.capitalize(),
                 height=500
+            )
+
+            fig.update_xaxes(
+                title_font=dict(
+                    family="Times New Roman",
+                    size=20,
+                    color="black"
+                ),
+                tickfont=dict(
+                    family="Times New Roman",
+                    size=18,
+                    color="black"
+                )
+            )
+
+            fig.update_yaxes(
+                title_font=dict(
+                    family="Times New Roman",
+                    size=20,
+                    color="black"
+                ),
+                tickfont=dict(
+                    family="Times New Roman",
+                    size=18,
+                    color="black"
+                )
             )
 
             chart_placeholder.plotly_chart(fig, use_container_width=True)
@@ -1125,6 +1313,54 @@ if page == "📊 Dashboard" and uploaded_files:
             name='Major Anomalies',
             marker=dict(color='red', size=10)
         ))
+
+        fig.update_layout(
+            template="plotly_white",
+        
+            font=dict(
+                family="Times New Roman",
+                size=18,
+                color="black"
+            ),
+        
+            legend=dict(
+                font=dict(
+                    family="Times New Roman",
+                    size=18,
+                    color="black"
+                )
+            )
+        )
+        
+        fig.update_xaxes(
+            rangeslider_visible=True,
+        
+            title_font=dict(
+                family="Times New Roman",
+                size=20,
+                color="black"
+            ),
+        
+            tickfont=dict(
+                family="Times New Roman",
+                size=18,
+                color="black"
+            )
+        )
+        
+        fig.update_yaxes(
+            title_font=dict(
+                family="Times New Roman",
+                size=20,
+                color="black"
+            ),
+        
+            tickfont=dict(
+                family="Times New Roman",
+                size=18,
+                color="black"
+            )
+        )
 
         fig.update_xaxes(rangeslider_visible=True)
 
@@ -1254,12 +1490,53 @@ if page == "📊 Dashboard" and uploaded_files:
         )
     ))
     
+    # fig_timeline.update_layout(
+    #     template="plotly_dark",
+    #     title="SCADA Attack Timeline (Pattern View)",
+    #     xaxis_title="Time",
+    #     yaxis_title="Anomaly Occurrence (0 / 1)",
+    #     yaxis=dict(range=[-0.2, 1.2])
+    # )
+
     fig_timeline.update_layout(
-        template="plotly_dark",
-        title="SCADA Attack Timeline (Pattern View)",
+        template="plotly_white",
+
+        title=dict(
+            text="SCADA Attack Timeline (Pattern View)",
+            font=dict(
+                family="Times New Roman",
+                size=24,
+                color="black"
+            )
+        ),
+
+        font=dict(
+            family="Times New Roman",
+            size=18,
+            color="black"
+        ),
+
+        legend=dict(
+            font=dict(
+                family="Times New Roman",
+                size=18,
+                color="black"
+            )
+        ),
+
         xaxis_title="Time",
         yaxis_title="Anomaly Occurrence (0 / 1)",
-        yaxis=dict(range=[-0.2, 1.2])
+        yaxis=dict(range=[-0.2,1.2])
+    )
+
+    fig_timeline.update_xaxes(
+        title_font=dict(size=20,color="black"),
+        tickfont=dict(size=18,color="black")
+    )
+
+    fig_timeline.update_yaxes(
+        title_font=dict(size=20,color="black"),
+        tickfont=dict(size=18,color="black")
     )
     
     st.plotly_chart(fig_timeline, use_container_width=True)
