@@ -1,6 +1,6 @@
 # Hybrid SCADA Anomaly Detection and Adaptive Recovery System
 
-![Python](https://img.shields.io/badge/Python-3.x-blue)
+[![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Framework-FF4B4B)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-F7931E)
 ![Plotly](https://img.shields.io/badge/Plotly-Visualization-3F4F75)
